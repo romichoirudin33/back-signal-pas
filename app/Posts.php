@@ -6,17 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
-	//nama tabel di database
 	protected $table = "posts";
 
-	//nama coloum di table database
 	protected $fillable = [
-		'gambar',
-		'penulis',
-		'slug',
-		'judul',
-		'isi',
-		'status'
+		'image',
+		'title',
+		'content',
+		'status',
+        'user_id'
 	];
+
+    public function penulis()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+	}
 
 }

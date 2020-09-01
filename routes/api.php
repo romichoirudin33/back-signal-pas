@@ -17,9 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
 
+Route::post('login', 'Api\AuthController@login');
+Route::post('register', 'Api\AuthController@register');
+
+Route::post('tahanan', 'Api\TahananController@store');
+
 //route tabel posts
 Route::get('posts', 'ApiPostsController@index');
 Route::get('posts/{id}', 'ApiPostsController@show');
-Route::post('posts', 'ApiPostsController@store');
-Route::put('posts/{id}', 'ApiPostsController@update');
-Route::delete('posts/{id}', 'ApiPostsController@destroy');
+//Route::post('posts', 'ApiPostsController@store');
+//Route::put('posts/{id}', 'ApiPostsController@update');
+//Route::delete('posts/{id}', 'ApiPostsController@destroy');

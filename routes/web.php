@@ -12,6 +12,13 @@
 */
 
 Route::get('/', function () {
+    return redirect()->route('login');
 	return view('welcome');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('/user', 'UserController');
+Route::resource('/tahanan', 'TahananController');

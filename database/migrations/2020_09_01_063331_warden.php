@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostsTable extends Migration
+class Warden extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('wardens', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image')->nullable();
-            $table->string('title');
-            $table->longText('content');
-            $table->enum('status', ['publish', 'draft', 'trash'])->default('draft');
             $table->unsignedInteger('user_id');
+            $table->string('jabatan')->nullable();
+            $table->string('upt')->nullable();
+            $table->string('phone', 15)->nullable();
+            $table->string('score')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('wardens');
     }
 }
