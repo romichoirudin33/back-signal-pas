@@ -27,6 +27,7 @@
             background-position: inherit; /* Center the image */
             background-repeat: no-repeat;
         }
+
         .bg-utama{
             background-color: #9f1723;
         }
