@@ -17,17 +17,25 @@ class AuthController extends Controller
     {
         if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
             $user = Auth::user();
+            $is_login = true;
+            $message = "";
             if ($user->is_admin){
-                return response()->json(['error'=>'User ini bukan user sipir !'], 200);
+                $is_login = false;
+                $message = 'User ini bukan user sipir !';
+//                return response()->json(['error'=>'User ini bukan user sipir !'], 401);
             }
 
             if (!$user->is_confirm){
-                return response()->json(['error'=>'Maaf user ini belum di aktifkan admin !'], 200);
+                $is_login = false;
+                $message = 'Maaf user ini belum di aktifkan admin !';
+//                return response()->json(['error'=>'Maaf user ini belum di aktifkan admin !'], 401);
             }
 
             $success['name'] =  $user->name;
             $success['id'] =  $user->id;
             $success['access_token'] =  $user->api_token;
+            $success['is_login'] =  $is_login;
+            $success['message'] =  $message;
             return response()->json($success, $this->successStatus);
         }
         else{
