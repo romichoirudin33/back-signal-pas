@@ -62,7 +62,7 @@
                             </tr>
                             <tr>
                                 <th>Kelas</th>
-                                <td>{{ $data->score }} lorem</td>
+                                <td>{{ $data->score }}</td>
                             </tr>
                             <tr>
                                 <th>Dibuat</th>
