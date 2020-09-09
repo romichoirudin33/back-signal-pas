@@ -53,9 +53,21 @@ header('Content-Disposition: attachment; filename=user.xls');
                 @endif
             </td>
             <td>{{ $i->username }}</td>
-            <td>{{ $i->warden['jabatan'] }}</td>
-            <td>{{ $i->warden['upt'] }}</td>
-            <td>{{ $i->warden['phone'] }}</td>
+            <td>
+                @if(!$i->is_admin)
+                    {{ $i->warden['jabatan'] }}
+                @endif
+            </td>
+            <td>
+                @if(!$i->is_admin)
+                    {{ $i->warden['upt'] }}
+                @endif
+            </td>
+            <td>
+                @if(!$i->is_admin)
+                    {{ $i->warden['phone'] }}
+                @endif
+            </td>
             <td>
                 @if(!$i->is_admin)
                     {{ $i->warden['score'] }}
