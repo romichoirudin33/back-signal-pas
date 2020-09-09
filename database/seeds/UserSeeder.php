@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'jabatan' => 'jabatan',
             'upt' => 'upt',
             'phone' => 'phone',
-            'score' => 'score',
+            'score' => '100',
         ];
         Warden::create($data);
     }
