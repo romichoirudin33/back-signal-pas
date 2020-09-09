@@ -9,6 +9,7 @@ header('Content-Disposition: attachment; filename=user.xls');
             border-top: solid 1px black;
             border-bottom: solid 1px black;
         }
+
         td.border-top {
             border-top: solid 1px black;
         }
@@ -29,7 +30,7 @@ header('Content-Disposition: attachment; filename=user.xls');
         <td class="border">No Telp</td>
         <td class="border" align="center">Skor</td>
     </tr>
-@foreach($data as $i)
+    @foreach($data as $i)
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $i->name }}</td>
@@ -56,18 +57,20 @@ header('Content-Disposition: attachment; filename=user.xls');
             <td>{{ $i->warden['upt'] }}</td>
             <td>{{ $i->warden['phone'] }}</td>
             <td>
-                {{ $i->warden['score'] }}
-                @if($i->warden['score'] != "")
-                    @if($i->warden['score'] < 45 )
-                        Rendah
-                    @elseif($i->warden['score'] <= 135 )
-                        Sedang
-                    @else
-                        Tinggi
+                @if(!$i->is_admin)
+                    {{ $i->warden['score'] }}
+                    @if($i->warden['score'] != "")
+                        @if($i->warden['score'] < 45 )
+                            Rendah
+                        @elseif($i->warden['score'] <= 135 )
+                            Sedang
+                        @else
+                            Tinggi
+                        @endif
                     @endif
                 @endif
             </td>
         </tr>
-@endforeach
+    @endforeach
 </table>
 </body>
