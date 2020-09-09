@@ -71,6 +71,7 @@ class AuthController extends Controller
         $user = User::where('id', $request->user()->id)
             ->first();
         $data = [
+            'id' => $user->id,
             'name' => $user->name,
             'username' => $user->username,
             'email' => $user->email,
