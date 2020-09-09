@@ -14,9 +14,30 @@
                                 </button>
                             </div>
                         @endif
-                        <h4>Detail Tahanan <a href="{{ route('tahanan.index') }}"
-                                           class="btn btn-outline-success btn-sm float-right">Kembali</a></h4>
-                            <hr>
+                        <h4>
+                            Detail Tahanan
+                            <div class="float-right">
+                                <a href="{{ route('tahanan.index') }}" class="btn btn-outline-success btn-sm">Kembali</a>
+                                <button class="btn btn-sm btn-outline-danger"
+                                        data-toggle="tooltip"
+                                        data-placement="top"
+                                        title="Hapus"
+                                        onclick="if (confirm('Anda yakin akan menghapus data ini ?')){
+                                            event.preventDefault();
+                                            document.getElementById('delete-{{ $data->id }}').submit();
+                                            };">
+                                    Hapus
+                                </button>
+                                <form id="delete-{{ $data->id }}"
+                                      action="{{ route('tahanan.destroy', ['id'=>$data->id]) }}"
+                                      method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
+                            </div>
+
+                        </h4>
+                        <hr>
                         <table class="table table-bordered table-sm">
                             <tr>
                                 <th width="30%">Nama Petugas</th>

@@ -7,13 +7,14 @@
             <div class="card shadow-sm">
                 <div class="card-body">
 
-                    <div class="text-center">
-                        <img src="{{ asset('assets/images/icon_login.png') }}" class="mt-3 mb-5" style="max-width: 100%; height: 150px">
+                    <div class="text-center mt-3 mb-3" style="max-width: 100%; height: 7rem">
+                        <img src="{{ asset('assets/images/icon.png') }}" style="max-width: 100%; max-height: 40%">
+                        <br>
+                        <img src="{{ asset('assets/images/signal_full.png') }}" style="max-width: 100%; max-height: 60%">
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 

@@ -14,7 +14,13 @@ class TahananController extends Controller
      */
     public function index()
     {
-        return view('tahanan.index')->with('data', Tahanan::all());
+        $data = Tahanan::all();
+
+        $export = \request('export');
+        if ($export != ""){
+            return view('tahanan.excel')->with('data', $data);
+        }
+        return view('tahanan.index')->with('data', $data);
     }
 
     /**
@@ -80,6 +86,7 @@ class TahananController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tahanan::where('id', $id)->delete();
+        return redirect()->route('tahanan.index')->with('status', 'Hapus berhasil');
     }
 }

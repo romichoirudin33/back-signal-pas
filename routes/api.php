@@ -23,8 +23,8 @@ Route::post('register', 'Api\AuthController@register');
 Route::post('tahanan', 'Api\TahananController@store');
 
 //route tabel posts
-Route::get('posts', 'ApiPostsController@index');
-Route::get('posts/{id}', 'ApiPostsController@show');
+Route::get('news', 'ApiPostsController@index');
+Route::get('news/{id}', 'ApiPostsController@show');
 //Route::post('posts', 'ApiPostsController@store');
 //Route::put('posts/{id}', 'ApiPostsController@update');
 //Route::delete('posts/{id}', 'ApiPostsController@destroy');

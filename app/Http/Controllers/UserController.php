@@ -15,7 +15,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.index')->with('data', User::all());
+        $jenis = \request('jenis');
+        $export = \request('export');
+        $data = User::all();
+        if ($jenis == 'admin'){
+            $data = User::where('is_admin', true)->get();
+        }
+        if ($jenis == 'sipir'){
+            $data = User::where('is_admin', false)->get();
+        }
+
+        if ($export != ""){
+            return view('user.excel')->with('data', $data);
+        }
+        return view('user.index')->with('data', $data);
     }
 
     /**

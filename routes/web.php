@@ -11,17 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-	return view('welcome');
-});
+Route::get('/', 'GuestController@berita')->name('welcome');
 
 Auth::routes();
+Route::match(['get', 'post'], 'register', function(){
+    return redirect('/');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('/user', 'UserController');
     Route::resource('/tahanan', 'TahananController');
+    Route::resource('/news', 'NewsController');
 });
 
