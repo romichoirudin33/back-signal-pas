@@ -65,4 +65,22 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Register success'], $this->successStatus);
     }
+
+    public function user(Request $request)
+    {
+        $user = User::where('id', $request->user()->id)
+            ->first();
+        $data = [
+            'name' => $user->name,
+            'username' => $user->username,
+            'email' => $user->email,
+            'is_admin' => $user->is_admin,
+            'jabatan' => $user['warden']['jabatan'],
+            'upt' => $user['warden']['upt'],
+            'phone' => $user['warden']['phone'],
+            'score' => $user['warden']['score'],
+        ];
+
+        return response()->json($data, $this->successStatus);
+    }
 }
