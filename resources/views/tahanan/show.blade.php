@@ -14,8 +14,8 @@
                                 </button>
                             </div>
                         @endif
-                        <h4>
-                            Detail Tahanan
+                        <h5>
+                            Detail Tahanan dan WBP
                             <div class="float-right">
                                 <a href="{{ route('tahanan.index') }}" class="btn btn-outline-success btn-sm">Kembali</a>
                                 <button class="btn btn-sm btn-outline-danger"
@@ -36,12 +36,12 @@
                                 </form>
                             </div>
 
-                        </h4>
+                        </h5>
                         <hr>
                         <table class="table table-bordered table-sm">
                             <tr>
                                 <th width="30%">Nama Petugas</th>
-                                <td>{{ $data->petugas->name }}</td>
+                                <td>{{ $data['petugas']['name'] }}</td>
                             </tr>
                             <tr>
                                 <th>Nama WBP</th>

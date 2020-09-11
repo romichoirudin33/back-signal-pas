@@ -71,7 +71,7 @@
                                 <a class="nav-link" href="{{ route('user.index') }}">{{ __('User') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('tahanan.index') }}">{{ __('Tahanan') }}</a>
+                                <a class="nav-link" href="{{ route('tahanan.index') }}">{{ __('Tahanan dan WBP') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('news.index') }}">{{ __('Berita') }}</a>
