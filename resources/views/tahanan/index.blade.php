@@ -75,7 +75,7 @@
                                         <tbody>
                                         @foreach($data as $i)
                                             <tr>
-                                                <td>{{ $i->petugas->name }}</td>
+                                                <td>{{ $i['petugas']['name'] }}</td>
                                                 <td>
                                                     <a href="{{ route('tahanan.show', ['id'=>$i->id]) }}">
                                                         {{ $i->nama_lengkap }}

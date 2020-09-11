@@ -84,7 +84,7 @@
                                                 @if($i->is_admin)
                                                     <b class="text-primary">Admin</b>
                                                 @else
-                                                    <b class="text-success">Sipir</b>
+                                                    <b class="text-success">Petugas</b>
                                                 @endif
                                             </td>
                                             <td class="text-center">

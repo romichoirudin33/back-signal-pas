@@ -40,7 +40,7 @@ header('Content-Disposition: attachment; filename=user.xls');
                 @if($i->is_admin)
                     Admin
                 @else
-                    Sipir
+                    Petugas
                 @endif
             </td>
             <td>
