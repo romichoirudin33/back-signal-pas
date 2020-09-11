@@ -15,17 +15,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            'name' => 'admin',
-            'username' => 'admin',
-            'email' => 'admin@mail.com',
-            'password' => Hash::make('admin'),
-            'api_token' => str_random(60),
-            'is_admin' => true,
-            'is_confirm' => true,
-        ];
-        User::create($data);
-
-        $data = [
             'name' => 'test sipir',
             'username' => '123456',
             'email' => 'test@mail.com',
