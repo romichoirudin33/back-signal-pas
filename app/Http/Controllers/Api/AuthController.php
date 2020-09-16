@@ -39,7 +39,11 @@ class AuthController extends Controller
             return response()->json($success, $this->successStatus);
         }
         else{
-            return response()->json(['error'=>'User not found, Try again !'], 401);
+            $is_login = false;
+            $message = 'User not found, Try again !!';
+            $success['is_login'] =  $is_login;
+            $success['message'] =  $message;
+            return response()->json($success, $this->successStatus);
         }
     }
 
