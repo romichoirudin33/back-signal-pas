@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'GuestController@berita')->name('welcome');
+Route::get('/reset', 'GuestController@reset')->name('reset');
 
 Auth::routes();
 Route::match(['get', 'post'], 'register', function(){
