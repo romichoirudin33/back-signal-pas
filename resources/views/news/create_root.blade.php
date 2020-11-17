@@ -55,7 +55,6 @@
 
                         <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="lapas_id" value="{{ $lapas_id }}">
 
                             <div class="row">
                                 <div class="col-md-5">
@@ -72,11 +71,20 @@
                                             <option value="draft">draft</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="title">Lapas</label>
+                                        <select name="lapas_id" class="form-control" required>
+                                            <option value="">Pilih</option>
+                                            @foreach($lapas as $i)
+                                                <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="title">Judul Berita</label>
-                                        <input type="text" name="title" class="form-control">
+                                        <input type="text" name="title" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea name="contents" class="form-control" rows="10"></textarea>

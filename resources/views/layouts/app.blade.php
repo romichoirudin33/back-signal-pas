@@ -31,12 +31,30 @@
             background-repeat: no-repeat;
         }
 
+        a:hover {
+            text-decoration: none;
+        }
+
         .bg-utama {
             background-color: #9f1723;
         }
 
         .bg-accent {
-            background-color: #ec1c24;
+            background-color: #d81728;
+        }
+
+        .navbar .dropdown-menu {
+            background-color: #9f1723;
+        }
+
+        /* and this styles the dropdwon trigger link, when open */
+        .navbar .dropdown.show a {
+            background-color: #9f1723;
+            color: #fff;
+        }
+
+        .bg-gray {
+            background-color: #696969;
         }
 
         @media screen and (max-width: 767px) {
@@ -67,9 +85,25 @@
                 @else
                     @if(Auth::user()->is_admin)
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.index') }}">{{ __('User') }}</a>
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <?php $auth = Auth::user(); ?>
+                                    @if($auth->is_admin and $auth->lapas_id == 0)
+                                        <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'root']) }}">Root</a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'admin']) }}">Admin</a>
+                                    <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'sipir']) }}">Sipir</a>
+                                </div>
                             </li>
+                            @if($auth->is_admin and $auth->lapas_id == 0)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('lapas.index') }}">{{ __('Lapas') }}</a>
+                                </li>
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('tahanan.index') }}">{{ __('Tahanan dan WBP') }}</a>
                             </li>
@@ -119,9 +153,51 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    @yield('jumbotron')
+
+    <main class="py-md-3">
         @yield('content')
     </main>
+
+    <footer class="bg-secondary pt-4 mt-4">
+        <div class="container mb-4">
+            <div class="row text-white">
+                <div class="col-md-4">
+                    <h5 class="mb-3">Lembaga Pemasyarakatan</h5>
+                    <?php $lapas = \App\Models\Lapas::where('id', '!=', 0)->inRandomOrder()->limit(5)->get() ?>
+                    <table class="table table-sm text-white">
+                        @foreach($lapas as $l)
+                            <tr>
+                                <td style="border-bottom: 1px solid white">{{ $l->nama }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+                <div class="col-md-4 offset-md-4 mt-md-0 mt-3">
+                    <h5 class="mb-3">Ikuti Media Social Signal Pas</h5>
+                    <a href="#">
+                        <img src="{{ asset('assets/images/facebook.png') }}" alt="facebook" class="rounded-circle"
+                             height="30">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/images/instagram.png') }}" alt="instagram" class="rounded-circle"
+                             height="30">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/images/whatsapp.png') }}" alt="whatsapp" class="rounded-circle"
+                             height="30">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-white bg-gray p-2 align-content-center">
+            <p class="m-0">
+                <small>
+                    © 2020 Sistem Indentifikasi Gangguan Keamanan dan Laporan Pemasyarakatan. All Rights Reserved.
+                </small>
+            </p>
+        </div>
+    </footer>
 </div>
 
 <!-- Scripts -->

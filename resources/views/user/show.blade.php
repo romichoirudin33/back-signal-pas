@@ -57,8 +57,10 @@
                             <tr>
                                 <th>Status</th>
                                 <td>
-                                    @if($data->is_admin)
-                                        <b class="text-primary">Admin</b>
+                                    @if($data->is_admin and $data->lapas_id == 0)
+                                        <b class="text-primary">Root</b>
+                                    @elseif($data->is_admin)
+                                        <b class="text-secondary">Admin</b>
                                     @else
                                         <b class="text-success">Petugas</b>
                                     @endif

@@ -6,6 +6,18 @@
     <link href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap4.min.css" rel="stylesheet">
 @endsection
 
+@section('jumbotron')
+    <div class="jumbotron jumbotron-fluid text-white shadow-lg mb-md-3 pt-5 pb-5" style="background-color: #d81728;">
+        <div class="container">
+            <h4>Situs Resmi Signal Pas</h4>
+            <ol class="breadcrumb bg-transparent p-0">
+                <li class="breadcrumb-item text-white"><a href="{{ url('/') }}" class="text-white">User</a></li>
+                <li class="breadcrumb-item active text-white">Root</li>
+            </ol>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -21,7 +33,7 @@
                             </div>
                         @endif
                         <h4>
-                            User Sipir
+                            User Root
                             <div class="float-right">
                                 <div class="dropdown">
                                     <button class="btn btn-outline-info btn-sm dropdown-toggle"
@@ -42,17 +54,18 @@
                                         <a class="dropdown-item" href="{{ route('user.index', ['jenis'=> 'sipir']) }}">User
                                             Sipir</a>
                                         <div class="dropdown-divider"></div>
-                                        <h6 class="dropdown-header">Export</h6>
-                                        <a class="dropdown-item" target="_blank"
-                                           href="{{ route('user.index', ['export' => 'xls','jenis' => request('jenis')]) }}">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download"
-                                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                      d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                                <path fill-rule="evenodd"
-                                                      d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                        <h6 class="dropdown-header">Tambah</h6>
+                                        <a class="dropdown-item" href="{{ route('user.create', ['jenis' => 'root']) }}">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                             </svg>
-                                            Excel
+                                            User Root
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('user.create', ['jenis' => 'admin']) }}">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                            </svg>
+                                            User Admin
                                         </a>
                                     </div>
                                 </div>
@@ -68,8 +81,6 @@
                                         <th>Nama</th>
                                         <th>Username</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Konfirmasi</th>
-                                        <th class="text-center">Score</th>
                                         <th class="text-center">Aksi</th>
                                     </tr>
                                     </thead>
@@ -77,75 +88,15 @@
                                     @foreach($data as $i)
                                         <tr>
                                             <td>
-                                                {{ $i->name }}<br>
+                                                {{ $i->name }} <br>
                                                 <small class="text-black-50">{{ $i->email }}</small>
                                             </td>
                                             <td>{{ $i->username }}</td>
                                             <td class="text-center">
                                                 @if($i->is_admin)
-                                                    <b class="text-primary">Admin</b>
+                                                    <b class="text-primary">Root</b>
                                                 @else
                                                     <b class="text-success">Petugas</b>
-                                                @endif
-                                                    <br>
-                                                    <small class="text-black-50">{{ $i->lapas ? $i->lapas->nama : '-' }}</small>
-                                            </td>
-                                            <td class="text-center">
-                                                @if(!$i->is_admin)
-                                                    @if($i->is_confirm)
-                                                        <button class="btn btn-success btn-sm"
-                                                                data-toggle="tooltip"
-                                                                data-placement="top"
-                                                                title="Update Status Konfirmasi"
-                                                                onclick="if (confirm('Jika belum konfirmasi user tidak bisa login ?')){
-                                                                    event.preventDefault();
-                                                                    document.getElementById('edit-{{ $i->id }}').click();
-                                                                    };">
-                                                            Telah dikonfirmasi
-                                                        </button>
-                                                        <a id="edit-{{ $i->id }}" href="{{ route('user.edit', ['id' => $i->id]) }}"></a>
-                                                        <form id="update-{{ $i->id }}"
-                                                              action="{{ route('user.update', ['id'=>$i->id]) }}"
-                                                              method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="hidden" name="is_confirm" value="0">
-                                                        </form>
-                                                    @else
-                                                        <button class="btn btn-warning btn-sm"
-                                                                data-toggle="tooltip"
-                                                                data-placement="top"
-                                                                title="Update Status Konfirmasi"
-                                                                onclick="if (confirm('Aktifkan user ?')){
-                                                                    event.preventDefault();
-                                                                    document.getElementById('edit-{{ $i->id }}').click();
-                                                                    };">
-                                                            Belum dikonfirmasi
-                                                        </button>
-                                                        <a id="edit-{{ $i->id }}" href="{{ route('user.edit', ['id' => $i->id]) }}"></a>
-                                                        <form id="update-{{ $i->id }}"
-                                                              action="{{ route('user.update', ['id'=>$i->id]) }}"
-                                                              method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="hidden" name="is_confirm" value="1">
-                                                        </form>
-                                                    @endif
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if(!$i->is_admin)
-                                                    {{ $i->warden['score'] }}
-                                                    @if($i->warden['score'] != "")
-                                                        <br>
-                                                        @if($i->warden['score'] < 45 )
-                                                            <span class="badge badge-danger">Rendah</span>
-                                                        @elseif($i->warden['score'] <= 135 )
-                                                            <span class="badge badge-warning">Sedang</span>
-                                                        @else
-                                                            <span class="badge badge-success">Tinggi</span>
-                                                        @endif
-                                                    @endif
                                                 @endif
                                             </td>
                                             <td class="text-center">

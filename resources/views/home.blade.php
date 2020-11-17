@@ -16,7 +16,9 @@
                     @endif
                     <div class="text-center">
                         <img src="{{ asset('assets/images/icon.png') }}" style="max-width: 100%; height: 200px" class="mt-3 mb-3">
-                        <h3 class="mb-4">Sistem Indentifikasi Gangguan Keamanan dan Laporan Pemasyarakatan</h3>
+                        <h3 class="mb-4">
+                            Sistem Indentifikasi Gangguan Keamanan dan Laporan Pemasyarakatan
+                        </h3>
                         Selamat datang, <b>{{ Auth::user()->name }}</b>
                     </div>
                 </div>

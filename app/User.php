@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Lapas;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'email', 'password', 'api_token', 'is_admin', 'is_confirm'
+        'username', 'name', 'email', 'password', 'api_token', 'is_admin', 'is_confirm', 'lapas_id'
     ];
 
     /**
@@ -40,5 +41,10 @@ class User extends Authenticatable
     public function warden()
     {
         return $this->hasOne(Warden::class, 'user_id');
+    }
+
+    public function lapas()
+    {
+        return $this->belongsTo(Lapas::class, 'lapas_id');
     }
 }

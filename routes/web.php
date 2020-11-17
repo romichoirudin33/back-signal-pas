@@ -25,5 +25,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/user', 'UserController');
     Route::resource('/tahanan', 'TahananController');
     Route::resource('/news', 'NewsController');
+    Route::resource('/lapas', 'LapasController');
 });
 

@@ -24,7 +24,7 @@
                         @endif
                         <h4>
                             Tahanan dan WBP <br>
-                            <small class="text-black-50">{{ $nama_lapas }}</small>
+                            <small class="text-black-50">Seluruh Lapas</small>
                         </h4>
                         <hr>
 
@@ -34,16 +34,32 @@
                                     <div class="col-md-6">
                                         <form action="" id="form-search">
                                             <div class="form-group">
+                                                <label for="title">Lapas</label>
+                                                <select name="lapas_id" class="form-control form-control-sm">
+                                                    <option
+                                                        value="{{ request('lapas_id') }}">{{ $nama_lapas }}</option>
+                                                    @foreach($lapas as $i)
+                                                        <option value="{{ $i->id }}">{{ $i->nama }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <label>Pencarian</label>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control form-control-sm text-sm-left"
+                                                    <input type="text"
+                                                           class="form-control form-control-sm text-sm-left"
                                                            name="key" id="key" value="{{ request('key') }}"
                                                            placeholder="Masukkan nama tahanan">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary btn-sm" type="button" id="btn-search">
-                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                                                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                                        <button class="btn btn-outline-secondary btn-sm"
+                                                                type="submit" id="btn-search">
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16"
+                                                                 class="bi bi-search" fill="currentColor"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                      d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                                                <path fill-rule="evenodd"
+                                                                      d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                                                             </svg>
                                                         </button>
                                                     </div>
@@ -55,7 +71,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="float-md-right">
-                                            <a class="btn btn-outline-secondary btn-sm" target="_blank"
+                                            <a class="btn btn-outline-secondary" target="_blank"
                                                href="{{ route('tahanan.index', ['export' => 'xls']) }}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16"
                                                      class="bi bi-download"
@@ -82,8 +98,12 @@
                                         </thead>
                                         <tbody>
                                         @foreach($data as $i)
+                                            <?php $i['petugas']['lapas_id'] != 0 ? $lapas = \App\Models\Lapas::where('id', $i['petugas']['lapas_id'])->first()->nama : $lapas = '-'; ?>
                                             <tr>
-                                                <td>{{ $i['petugas']['name'] }}</td>
+                                                <td>
+                                                    {{ $i['petugas']['name'] }} <br>
+                                                    <small class="text-secondary">{{ $lapas }}</small>
+                                                </td>
                                                 <td>
                                                     <a href="{{ route('tahanan.show', ['id'=>$i->id]) }}">
                                                         {{ $i->nama_lengkap }}
@@ -122,7 +142,7 @@
             $('#btn-search').click(function (event) {
                 var cari = $('#key').val();
                 if (cari.length < 5) {
-                    alert('Anda harus memasukkan minimal 5 karakter');
+                    alert('Nama tahanan minimal dimasukkan 5 karakter !!');
                     event.preventDefault();
                     return false;
                 } else {
@@ -130,7 +150,6 @@
                     $('#form-search').submit();
                 }
             });
-
         });
     </script>
 @endsection
