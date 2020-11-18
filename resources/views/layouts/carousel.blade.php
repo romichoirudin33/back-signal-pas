@@ -1,15 +1,18 @@
 <div id="carouselExampleCaptions" class="carousel slide " data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <div class="jumbotron jumbotron-fluid shadow-sm bg-secondary" style="padding-top: 56.25%;">
+            <div class="jumbotron jumbotron-fluid shadow-sm"
+                 style="padding-top: 56.25%; background-size: 100% 100%; background: url('{{ asset('assets/images/jumbotron-1.png') }}') no-repeat center;">
             </div>
         </div>
         <div class="carousel-item">
-            <div class="jumbotron jumbotron-fluid shadow-sm bg-success" style="padding-top: 56.25%;">
+            <div class="jumbotron jumbotron-fluid shadow-sm"
+                 style="padding-top: 56.25%; background-size: 100% 100%; background: url('{{ asset('assets/images/jumbotron-2.png') }}') no-repeat center;">
             </div>
         </div>
         <div class="carousel-item">
-            <div class="jumbotron jumbotron-fluid shadow-sm bg-primary" style="padding-top: 56.25%;">
+            <div class="jumbotron jumbotron-fluid shadow-sm"
+                 style="padding-top: 56.25%; background-size: 100% 100%; background: url('{{ asset('assets/images/jumbotron-3.png') }}') no-repeat center;">
             </div>
         </div>
     </div>
