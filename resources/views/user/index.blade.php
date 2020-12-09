@@ -21,7 +21,7 @@
                             </div>
                         @endif
                         <h4>
-                            User Sipir
+                            User Aplikator
                             <div class="float-right">
                                 <div class="dropdown">
                                     <button class="btn btn-outline-info btn-sm dropdown-toggle"

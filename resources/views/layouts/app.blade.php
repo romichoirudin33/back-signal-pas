@@ -96,7 +96,7 @@
                                         <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'root']) }}">Root</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'admin']) }}">Admin</a>
-                                    <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'sipir']) }}">Sipir</a>
+                                    <a class="dropdown-item" href="{{ route('user.index', ['jenis' => 'sipir']) }}">Aplikator</a>
                                 </div>
                             </li>
                             @if($auth->is_admin and $auth->lapas_id == 0)
