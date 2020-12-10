@@ -38,6 +38,11 @@ class TahananController extends Controller
                     ->whereHas('petugas', function ($q) use ($lapas_id){
                     $q->where('lapas_id', $lapas_id);
                 })->paginate(50);
+            }elseif ($lapas_id != ''){
+                $nama_lapas = Lapas::where('id', $lapas_id)->first()->nama;
+                $data = Tahanan::whereHas('petugas', function ($q) use ($lapas_id){
+                        $q->where('lapas_id', $lapas_id);
+                    })->paginate(50);
             }elseif ($cari != ''){
                 $data = Tahanan::where('nama_lengkap', 'LIKE', '%' . $cari . '%')->paginate(50);
             }else{

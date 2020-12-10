@@ -49,7 +49,7 @@
                                                     <input type="text"
                                                            class="form-control form-control-sm text-sm-left"
                                                            name="key" id="key" value="{{ request('key') }}"
-                                                           placeholder="Masukkan nama tahanan">
+                                                           placeholder="Masukkan nama WBP">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-outline-secondary btn-sm"
                                                                 type="submit" id="btn-search">
@@ -67,7 +67,7 @@
                                             </div>
                                         </form>
 
-                                        {{ $data->links() }}
+                                        {{ $data->appends(request()->input())->links() }}
                                     </div>
                                     <div class="col-md-6">
                                         <div class="float-md-right">
@@ -121,7 +121,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $data->links() }}
+                                    {{ $data->appends(request()->input())->links() }}
                                 @else
                                     <div class="alert alert-info fade show" role="alert">
                                         <strong>Info</strong> Data kosong
@@ -139,17 +139,17 @@
 @section('js')
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btn-search').click(function (event) {
-                var cari = $('#key').val();
-                if (cari.length < 5) {
-                    alert('Nama tahanan minimal dimasukkan 5 karakter !!');
-                    event.preventDefault();
-                    return false;
-                } else {
-                    event.preventDefault();
-                    $('#form-search').submit();
-                }
-            });
+            // $('#btn-search').click(function (event) {
+            //     var cari = $('#key').val();
+            //     if (cari.length < 5) {
+            //         alert('Nama tahanan minimal dimasukkan 5 karakter !!');
+            //         event.preventDefault();
+            //         return false;
+            //     } else {
+            //         event.preventDefault();
+            //         $('#form-search').submit();
+            //     }
+            // });
         });
     </script>
 @endsection
